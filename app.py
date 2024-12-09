@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import mysql.connector
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -42,6 +43,21 @@ def about():
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
+@app.route('/signin', methods=['GET', 'POST'])
+def signin():
+    if request.method == 'POST':
+        # Xử lý đăng nhập ở đây
+        email = request.form['email']
+        password = request.form['password']
+
+        # Kiểm tra thông tin đăng nhập (ví dụ với cơ sở dữ liệu)
+        # Ở đây tạm thời kiểm tra email và password đơn giản
+        if email == 'test@example.com' and password == 'password123':
+            return redirect(url_for('home'))
+        else:
+            return "Invalid login. Please try again!"
+
+    return render_template('signin.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
