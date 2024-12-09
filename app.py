@@ -11,6 +11,8 @@ db_config = {
     'database': 'bookwebdbs'
 }
 
+
+
 @app.route('/')
 def home():
     # Connect to the databasef
@@ -18,7 +20,7 @@ def home():
     cursor = connection.cursor()
     
     # Execute the query to fetch item names and prices
-    cursor.execute("SELECT IName, Price_Quotation FROM item")
+    cursor.execute("SELECT IName, Price_Quotation FROM item ORDER BY RAND()")
     data = cursor.fetchall()  # Fetch all rows
     
     # Close the cursor and connection
@@ -42,6 +44,12 @@ def about():
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
+
+@app.route('/cart')
+def cart():
+    return render_template('cart.html')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

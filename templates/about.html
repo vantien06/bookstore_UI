@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - HCMUT Bookstore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,7 +16,7 @@
             line-height: 1.6;
         }
         header {
-            background-color: #0056a8;
+            background-color: #29104A;
             color: white;
             text-align: center;
             padding: 2rem 1rem;
@@ -34,7 +36,7 @@
             margin-bottom: 2rem;
         }
         h2 {
-            color: #0056a8;
+            color: #29104A;
             font-size: 1.8rem;
             margin-bottom: 0.5rem;
         }
@@ -49,7 +51,7 @@
             border-left: 4px solid #ffa500;
         }
         footer {
-            background-color: #0056a8;
+            background-color: black;
             color: white;
             text-align: center;
             padding: 1rem 0;
@@ -64,10 +66,49 @@
     </style>
 </head>
 <body>
+    
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#!">Order Now</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shoping now</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">All items</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="#!">Books</a></li>
+                            <li><a class="dropdown-item" href="#!">Devices</a></li>
+                            <li><a class="dropdown-item" href="#!">Study Supplies</a></li>
+                            <li><a class="dropdown-item" href="#!">Other items</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <a href="{{ url_for('cart') }}" class="btn btn-outline-dark">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">7</span>
+                </a>
+
+                <a href="{{ url_for('profile') }}" class="btn btn-outline-dark ms-3">
+                    <i class="bi-person-circle me-1"></i>
+                    Profile
+                </a>
+                
+            </div>
+        </div>
+    </nav>
+    
     <header>
         <h1>Welcome to HCMUT Bookstore</h1>
         <p>Your trusted source for academic, professional, and leisure reading.</p>
     </header>
+
+    
     <main>
         <section>
             <h2>About Us</h2>
