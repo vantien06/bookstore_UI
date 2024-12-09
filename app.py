@@ -53,11 +53,17 @@ def signin():
         # Kiểm tra thông tin đăng nhập (ví dụ với cơ sở dữ liệu)
         # Ở đây tạm thời kiểm tra email và password đơn giản
         if email == 'test@example.com' and password == 'password123':
-            return redirect(url_for('home'))
+            return redirect(url_for('home_after_signin'))
         else:
             return "Invalid login. Please try again!"
 
     return render_template('signin.html')
+@app.route('/home_after_signin')
+def home_after_signin():
+    return render_template('home_after_signin.html')
+# @app.route('/logout')
+# def profile():
+#     return render_template('home.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
