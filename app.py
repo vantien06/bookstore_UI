@@ -52,7 +52,7 @@ def signin():
 
         # Kiểm tra thông tin đăng nhập (ví dụ với cơ sở dữ liệu)
         # Ở đây tạm thời kiểm tra email và password đơn giản
-        if email == 'test@example.com' and password == 'password123':
+        if email == 'test@example.com' and password == '123':
             return redirect(url_for('home_after_signin'))
         else:
             return "Invalid login. Please try again!"
