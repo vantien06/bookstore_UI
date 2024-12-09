@@ -56,20 +56,16 @@
             <form method="post">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="profile-img ">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div>
+                        <div class="profile-img">
+                            <img src= "{{ image_url }}" alt=""/>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        {{ data[0].CName}}
+                                        {{ data[0].IName}}
                                     </h5>
-                                    <p class="proile-rating">RANKING : <span>{{ data[0].Rank}}</span></p>
+                                    <p class="proile-rating">STATUS : <span>Availability</span></p>
                                     
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
@@ -92,50 +88,58 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>User Id</label>
+                                                <label>Item ID:</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{ data[0].Customer_ID }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Name</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ data[0].CName }}</p>
+                                                <p>{{ data[0].Item_ID }}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Email</label>
+                                                <label>Item name:</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{ data[0].Email }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Phone</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ data[0].Phone }}</p>
+                                                <p>{{ data[0].IName }}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Addresss</label>
+                                                <label>Brand</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{ data[0].Address }}l</p>
+                                                <p>{{ data[0].Brand }}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Gender</label>
+                                                <label>Material</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{ data[0].Gender }}</p>
+                                                <p>{{ data[0].Material }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Manufacturer</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ data[0].Manufacturer }}l</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Price Quotation:</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ data[0].Price_Quotation }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Instock Quantity:</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ data[0].Instock_Quantity }}</p>
                                             </div>
                                         </div>
                             </div>

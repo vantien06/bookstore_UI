@@ -21,7 +21,7 @@ def home():
     cursor = connection.cursor()
     
     # Execute the query to fetch item names and prices
-    cursor.execute("SELECT IName, Price_Quotation FROM item")
+    cursor.execute("SELECT IName, Price_Quotation FROM item ORDER BY Brand DESC")
     data = cursor.fetchall()  # Fetch all rows
     
     # Close the cursor and connection
@@ -40,7 +40,40 @@ def about():
 
 @app.route('/profile')
 def profile():
-    return render_template('profile.html')
+    ID = session.get('username', None)
+    if ID is None:  # Check if the user is not logged in
+        return redirect(url_for('login'))  # Redirect to the login page
+
+    # Connect to the databasef
+    connection = mysql.connector.connect(**db_config)
+    cursor = connection.cursor()
+    
+    query = "SELECT * FROM Customer WHERE Customer_ID = %s"
+    cursor.execute(query, (ID,))  # Pass ID as a parameter to avoid SQL injection
+    data = cursor.fetchall()  # Fetch all rowsows
+
+    query = "SELECT MRank FROM membership WHERE Customer_ID = %s"
+    cursor.execute(query, (ID,))  # Pass ID as a parameter to avoid SQL injection
+    rank = cursor.fetchall()  # Fetch all rowsows
+
+    query = "SELECT Email FROM CustomerEmail     WHERE Customer_ID = %s"
+    cursor.execute(query, (ID,))  # Pass ID as a parameter to avoid SQL injection
+    email = cursor.fetchall()  # Fetch all rowsows
+    
+    
+    # Close the cursor and connection
+    cursor.close()
+    connection.close()
+
+    # Check if a rank was found and assign the first one (assuming only one rank per customer)
+    rank_value = rank[0][0] if rank else None  # If there's no rank, set it to None
+
+    email_value = email[0][0] if email else None  # If there's no rank, set it to None
+
+    data = [{"Customer_ID": row[0], "CName": row[1], "Address": row[2], "Phone": row[3], "Gender": row[4], "Rank": rank_value, "Email": email_value} for row in data]
+
+    
+    return render_template('profile.html', data = data)
 
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
@@ -83,7 +116,7 @@ def home_login():
     cursor = connection.cursor()
     
     # Execute the query to fetch item names and prices
-    cursor.execute("SELECT IName, Price_Quotation FROM item")
+    cursor.execute("SELECT IName, Price_Quotation FROM item ORDER BY Brand DESC")
     data = cursor.fetchall()  # Fetch all rows
     
     # Close the cursor and connection
@@ -105,6 +138,33 @@ def logout():
 def cart():
     # Chỉ cần chuyển hướng về trang đăng nhập
     return render_template('cart.html')
+
+@app.route('/view_detail')
+def view_detail():
+    image_url = request.args.get('image_url')
+    # Now you can use the image_url in your template or for processing
+
+    # Connect to the databasef
+    connection = mysql.connector.connect(**db_config)
+    cursor = connection.cursor()
+    
+    cursor.execute("SELECT * FROM item ORDER BY Brand DESC;")  # Pass ID as a parameter to avoid SQL injection
+    data = cursor.fetchall()  # Fetch all rowsows
+
+    # Close the cursor and connection
+    cursor.close()
+    connection.close()
+
+
+    data = [{"Item_ID": row[0], "IName": row[1], "Brand": row[2], "Material": row[3], "Manufacturer": row[4], "Price_Quotation": row[5], "Instock_Quantity": row[6]} for row in data]
+
+    print("Image URL: ", image_url )
+    # Chỉ cần chuyển hướng về trang đăng nhập
+    return render_template('view_detail.html', data = data, image_url = image_url)
+
+
+
+
 
 
 if __name__ == '__main__':
