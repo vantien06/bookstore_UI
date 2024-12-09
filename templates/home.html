@@ -45,12 +45,11 @@
                         </button>
                     </form>
 
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-person-circle me-1"></i>
-                            Profile
-                        </button>
-                    </form>
+                    <a href="{{ url_for('profile') }}" class="btn btn-outline-dark">
+                        <i class="bi-person-circle me-1"></i>
+                        Profile
+                    </a>
+                    
                 </div>
             </div>
         </nav>

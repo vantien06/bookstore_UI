@@ -30,7 +30,7 @@ def home():
     data = [{"name": row[0], "price": row[1]} for row in data]
     return render_template('home.html', data=data)
 
-@app.route('/testing')
+@app.route('/test')
 def test():
     return render_template('test.html')
 
@@ -38,6 +38,10 @@ def test():
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
