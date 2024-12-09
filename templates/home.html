@@ -45,9 +45,9 @@
                         </button>
                     </form>
 
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-person-circle me-1"></i>
+                    <form class="d-flex" action = "/profile" method="get">
+                        <button class="btn btn-outline-dark "  type="submit">
+                            <i class="bi-person-circle me-1" href="{{ url_for('profile') }}"   ></i>
                             Profile
                         </button>
                     </form>
