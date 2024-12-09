@@ -61,9 +61,10 @@ def signin():
 @app.route('/home_after_signin')
 def home_after_signin():
     return render_template('home_after_signin.html')
-# @app.route('/logout')
-# def profile():
-#     return render_template('home.html')
+@app.route('/logout')
+def logout():
+    # Chỉ cần chuyển hướng về trang đăng nhập
+    return redirect(url_for('signin'))
 
 if __name__ == '__main__':
     app.run(debug=True)
