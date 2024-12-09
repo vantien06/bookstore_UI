@@ -13,23 +13,31 @@ db_config = {
 
 @app.route('/')
 def home():
-    # Connect to the database
+    # Connect to the databasef
     connection = mysql.connector.connect(**db_config)
     cursor = connection.cursor()
     
-    # Execute the query
-    cursor.execute("SELECT * FROM Customer")
-    results = cursor.fetchall()  # Fetch all rows
-
-    # Get column names from the cursor
-    headers = [desc[0] for desc in cursor.description]
+    # Execute the query to fetch item names and prices
+    cursor.execute("SELECT IName, Price_Quotation FROM item")
+    data = cursor.fetchall()  # Fetch all rows
     
     # Close the cursor and connection
     cursor.close()
     connection.close()
     
     # Pass headers and results to the template
-    return render_template('home.html', headers=headers, data=results)
+    # Convert data to a list of dictionaries for easy JS consumption
+    data = [{"name": row[0], "price": row[1]} for row in data]
+    return render_template('home.html', data=data)
+
+@app.route('/testing')
+def test():
+    return render_template('test.html')
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
