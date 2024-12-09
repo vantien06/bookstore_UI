@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'  # Required for using session
 
 # Database configuration
 db_config = {
@@ -20,7 +21,7 @@ def home():
     cursor = connection.cursor()
     
     # Execute the query to fetch item names and prices
-    cursor.execute("SELECT IName, Price_Quotation FROM item ORDER BY RAND()")
+    cursor.execute("SELECT IName, Price_Quotation FROM item")
     data = cursor.fetchall()  # Fetch all rows
     
     # Close the cursor and connection
@@ -32,10 +33,6 @@ def home():
     data = [{"name": row[0], "price": row[1]} for row in data]
     return render_template('home.html', data=data)
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
-
 
 @app.route('/about')
 def about():
@@ -45,11 +42,70 @@ def about():
 def profile():
     return render_template('profile.html')
 
+@app.route('/signin', methods=['GET', 'POST'])
+def signin():
+
+    # Connect to the databasef
+    connection = mysql.connector.connect(**db_config)
+    cursor = connection.cursor()
+    
+    # Execute the query to fetch item names and prices
+    cursor.execute("SELECT Customer_ID FROM Customer")
+    data = cursor.fetchall()  # Fetch all rows
+    customer_ids = [item[0] for item in data]
+    
+    # Close the cursor and connection
+    cursor.close()
+    connection.close()
+
+
+    if request.method == 'POST':
+        # Xử lý đăng nhập ở đây
+        username = request.form['username']
+        password = request.form['password']
+
+        # Kiểm tra thông tin đăng nhập (ví dụ với cơ sở dữ liệu)
+        # Ở đây tạm thời kiểm tra email và password đơn giản
+        if username in customer_ids:
+            session['username'] = username
+            return redirect(url_for('home_login'))
+        else:
+            return "Invalid login. Please try again!"
+
+    return render_template('signin.html')
+
+
+@app.route('/home_login')
+def home_login():
+
+    # Connect to the databasef
+    connection = mysql.connector.connect(**db_config)
+    cursor = connection.cursor()
+    
+    # Execute the query to fetch item names and prices
+    cursor.execute("SELECT IName, Price_Quotation FROM item")
+    data = cursor.fetchall()  # Fetch all rows
+    
+    # Close the cursor and connection
+    cursor.close()
+    connection.close()
+    
+    # Pass headers and results to the template
+    # Convert data to a list of dictionaries for easy JS consumption
+    data = [{"name": row[0], "price": row[1]} for row in data]
+    return render_template('home_login.html', data=data)
+
+
+@app.route('/logout')
+def logout():
+    # Chỉ cần chuyển hướng về trang đăng nhập
+    return redirect(url_for('home'))
+
 @app.route('/cart')
 def cart():
+    # Chỉ cần chuyển hướng về trang đăng nhập
     return render_template('cart.html')
 
 
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port = 5000)
