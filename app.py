@@ -111,6 +111,12 @@ def signin():
 @app.route('/home_login')
 def home_login():
 
+
+    ID = session.get('username', None)
+
+    if (not ID):
+        return redirect(url_for('signin'))
+
     # Connect to the databasef
     connection = mysql.connector.connect(**db_config)
     cursor = connection.cursor()
@@ -132,7 +138,7 @@ def home_login():
 @app.route('/logout')
 def logout():
     # Chỉ cần chuyển hướng về trang đăng nhập
-    # session['username'] = None
+    session['username'] = None
     return redirect(url_for('home'))
 
 @app.route('/cart')
@@ -143,14 +149,14 @@ def cart():
 @app.route('/view_detail')
 def view_detail():
     image_url = request.args.get('image_url')
-    # Now you can use the image_url in your template or for processing
+    item_id = request.args.get('id')
 
     # Connect to the databasef
     connection = mysql.connector.connect(**db_config)
     cursor = connection.cursor()
     
-    query = "SELECT * FROM item"
-    cursor.execute(query)  # Pass ID as a parameter to avoid SQL injection
+    query = "SELECT * FROM item where Item_ID = %s"
+    cursor.execute(query, (item_id,))
     data = cursor.fetchall()  # Fetch all rowsows
 
     # Close the cursor and connection
@@ -160,7 +166,6 @@ def view_detail():
 
     data = [{"Item_ID": row[0], "IName": row[1], "Brand": row[2], "Material": row[3], "Manufacturer": row[4], "Price_Quotation": row[5], "Instock_Quantity": row[6]} for row in data]
 
-    print("Image URL: ", image_url )
     # Chỉ cần chuyển hướng về trang đăng nhập
     return render_template('view_detail.html', data = data, image_url = image_url)
 
