@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import mysql.connector
 
 app = Flask(__name__)
@@ -132,7 +132,8 @@ def home_login():
     # Pass headers and results to the template
     # Convert data to a list of dictionaries for easy JS consumption
     data = [{"name": row[0], "price": row[1]} for row in data]
-    return render_template('home_login.html', data=data)
+    global cart_count
+    return render_template('home_login.html', data=data, cart_count=cart_count )
 
 
 @app.route('/logout')
@@ -169,10 +170,18 @@ def view_detail():
     # Chỉ cần chuyển hướng về trang đăng nhập
     return render_template('view_detail.html', data = data, image_url = image_url)
 
+cart_count = 0
 
+@app.route('/add_to_cart', methods=['POST'])
+def add_to_cart():
+    global cart_count
+    cart_count += 1
+    print("Cart: ", cart_count)
 
-
-
+@app.route('/reset_cart', methods=['POST'])
+def reset_cart():
+    global cart_count
+    cart_count = 0  # Reset the cart count
 
 if __name__ == '__main__':
     app.run(debug=True, port = 5000)

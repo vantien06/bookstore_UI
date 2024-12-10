@@ -19,7 +19,8 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Order Now</a>
+                <a class="navbar-brand" href="#" onclick="resetCart()">Order Now</a>
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -40,7 +41,7 @@
                     <a href="{{ url_for('cart') }}" class="btn btn-outline-dark">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span id="cart-count" class="badge bg-dark text-white ms-1 rounded-pill">{{ cart_count }}</span>
                     </a>
 
                     <a href="{{ url_for('profile') }}" class="btn btn-outline-dark ms-3">
@@ -83,11 +84,16 @@
                                 </div>
                             </div>
                             <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center">
-                                    <a class="btn btn-outline-dark mt-auto" 
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-light">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a class="btn btn-primary btn-sm  align-items-center gap-2 me-0.5" 
                                        href="{{ url_for('view_detail', image_url='https://img.lovepik.com/free-png/20210918/lovepik-pencil-box-png-image_400259911_wh1200.png', id='ITEM_38') }}">
-                                       View Detail
+                                       <i class="bi bi-eye"></i> View Detail
+                                    </a>
+                            
+                                    <a class="btn btn-success btn-sm d-flex align-items-center gap-2" 
+                                    onclick="addToCart()">
+                                       <i class="bi bi-cart-plus"></i> Add to cart
                                     </a>
                                 </div>
                             </div>
@@ -118,8 +124,17 @@
                                 </div>
                             </div>
                             <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ url_for('view_detail', image_url='https://neighbourhood-enlargement.ec.europa.eu/sites/default/files/styles/ewcms_metatag_image/public/2024-05/20240514_digital_eu_bih.png?itok=H1dBWbTZ', id='ITEM_18') }}">View Detail</a></div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-light">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a class="btn btn-primary btn-sm  align-items-center gap-2 me-0.5" 
+                                    href="{{ url_for('view_detail', image_url='https://neighbourhood-enlargement.ec.europa.eu/sites/default/files/styles/ewcms_metatag_image/public/2024-05/20240514_digital_eu_bih.png?itok=H1dBWbTZ', id='ITEM_18') }}">
+                                       <i class="bi bi-eye"></i> View Detail
+                                    </a>
+                                    <a class="btn btn-success btn-sm d-flex align-items-center gap-2" 
+                                    onclick="addToCart()">
+                                       <i class="bi bi-cart-plus"></i> Add to cart
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -140,8 +155,18 @@
                                 </div>
                             </div>
                             <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ url_for('view_detail', image_url='https://us.123rf.com/450wm/seregam/seregam1904/seregam190400006/120464744-wall-clock-at-wooden-shelf-on-white-background.jpg', id='ITEM_44') }}">View Detail</a></div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-light">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a class="btn btn-primary btn-sm  align-items-center gap-2 me-0.5" 
+                                    href="{{ url_for('view_detail', image_url='https://us.123rf.com/450wm/seregam/seregam1904/seregam190400006/120464744-wall-clock-at-wooden-shelf-on-white-background.jpg', id='ITEM_44') }}">
+                                       <i class="bi bi-eye"></i> View Detail
+                                    </a>
+                            
+                                    <a class="btn btn-success btn-sm d-flex align-items-center gap-2" 
+                                    onclick="addToCart()">
+                                       <i class="bi bi-cart-plus"></i> Add to cart
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -167,8 +192,19 @@
                                 </div>
                             </div>
                             <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ url_for('view_detail', image_url='https://pcbworldtech.com/wp-content/uploads/2019/07/DA-ess-3-450x300.png', id='ITEM_28') }}">View Detail</a></div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-light">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a class="btn btn-primary btn-sm  align-items-center gap-2 me-0.5" 
+                                       href="{{ url_for('view_detail', image_url='https://pcbworldtech.com/wp-content/uploads/2019/07/DA-ess-3-450x300.png', id='ITEM_28') }}">
+                                       <i class="bi bi-eye"></i> View Detail
+                                    </a>
+                            
+                                    <a class="btn btn-success btn-sm d-flex align-items-center gap-2" 
+                                    onclick="addToCart()">
+
+                                       <i class="bi bi-cart-plus"></i> Add to cart
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -189,9 +225,19 @@
                                 </div>
                             </div>
                             <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ url_for('view_detail', image_url='https://media.istockphoto.com/id/1152881215/photo/wireless-bluetooth-computer-keyboard.jpg?s=612x612&w=0&k=20&c=f3JeroAaBNp9tdXaeQmsWMj1XBVkUAZmCzmQY-XWm0w=', id='ITEM_24') }}">View Detail</a></div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-light">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a class="btn btn-primary btn-sm  align-items-center gap-2 me-0.5" 
+                                       href="{{ url_for('view_detail', image_url='https://media.istockphoto.com/id/1152881215/photo/wireless-bluetooth-computer-keyboard.jpg?s=612x612&w=0&k=20&c=f3JeroAaBNp9tdXaeQmsWMj1XBVkUAZmCzmQY-XWm0w=', id='ITEM_24') }}">
+                                       <i class="bi bi-eye"></i> View Detail
+                                    </a>
+                            
+                                    <a class="btn btn-success btn-sm d-flex align-items-center gap-2" 
+                                    onclick="addToCart()">
 
+                                       <i class="bi bi-cart-plus"></i> Add to cart
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -209,9 +255,19 @@
                                 </div>
                             </div>
                             <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ url_for('view_detail', image_url='https://img.hexus.net/v2/news/logitech/unifying-receiver.jpg', id='ITEM_21') }}">View Detail</a></div>
-
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-light">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a class="btn btn-primary btn-sm  align-items-center gap-2 me-0.5" 
+                                       href="{{ url_for('view_detail', image_url='https://img.hexus.net/v2/news/logitech/unifying-receiver.jpg', id='ITEM_21') }}">
+                                       <i class="bi bi-eye"></i> View Detail
+                                    </a>
+                            
+                                    <a class="btn btn-success btn-sm d-flex align-items-center gap-2" 
+                                    onclick="addToCart()">
+                                    
+                                       <i class="bi bi-cart-plus"></i> Add to cart
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -241,9 +297,19 @@
                                 </div>
                             </div>
                             <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ url_for('view_detail', image_url='https://programmerfriend.com/img/content/best_java_books-title.jpg', id='ITEM_11') }}">View Detail</a></div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-light">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a class="btn btn-primary btn-sm  align-items-center gap-2 me-0.5" 
+                                       href="{{ url_for('view_detail', image_url='https://programmerfriend.com/img/content/best_java_books-title.jpg', id='ITEM_11') }}">
+                                       <i class="bi bi-eye"></i> View Detail
+                                    </a>
+                            
+                                    <a class="btn btn-success btn-sm d-flex align-items-center gap-2" 
+                                    onclick="addToCart()">
 
+                                       <i class="bi bi-cart-plus"></i> Add to cart
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -269,8 +335,19 @@
                                 </div>
                             </div>
                             <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ url_for('view_detail', image_url='https://m.media-amazon.com/images/I/81AoeQfpl4L._AC_UF1000,1000_QL80_.jpg', id='ITEM_19') }}">View Detail</a></div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-light">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a class="btn btn-primary btn-sm  align-items-center gap-2 me-0.5" 
+                                       href="{{ url_for('view_detail', image_url='https://m.media-amazon.com/images/I/81AoeQfpl4L._AC_UF1000,1000_QL80_.jpg', id='ITEM_19') }}">
+                                       <i class="bi bi-eye"></i> View Detail
+                                    </a>
+                            
+                                    <a class="btn btn-success btn-sm d-flex align-items-center gap-2" 
+                                    onclick="addToCart()">
+
+                                       <i class="bi bi-cart-plus"></i> Add to cart
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -299,6 +376,27 @@
             });
         </script>
 
+
+        <script>
+            async function addToCart() {
+                try {
+                    // Send a POST request to the server
+                    fetch('/add_to_cart', { method: 'POST' });
+                } catch (error) {
+                    console.error('Error adding to cart:', error);
+                }
+            }
+
+            async function resetCart() {
+                try {
+                    // Send a POST request to reset the cart count
+                    fetch('/reset_cart', { method: 'POST' });
+                    alert('Your cart has been cleared!');
+                } catch (error) {
+                    console.error('Error resetting cart:', error);
+                }
+            }
+        </script>
 
         <!-- Footer-->
         <footer style="background-color: #29104A;" class="py-5 ">
