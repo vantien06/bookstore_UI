@@ -42,7 +42,7 @@ def about():
 def profile():
     ID = session.get('username', None)
     if ID is None:  # Check if the user is not logged in
-        return redirect(url_for('login'))  # Redirect to the login page
+        return redirect(url_for('signin'))  # Redirect to the login page
 
     # Connect to the databasef
     connection = mysql.connector.connect(**db_config)
@@ -132,6 +132,7 @@ def home_login():
 @app.route('/logout')
 def logout():
     # Chỉ cần chuyển hướng về trang đăng nhập
+    # session['username'] = None
     return redirect(url_for('home'))
 
 @app.route('/cart')
@@ -148,7 +149,8 @@ def view_detail():
     connection = mysql.connector.connect(**db_config)
     cursor = connection.cursor()
     
-    cursor.execute("SELECT * FROM item ORDER BY Brand DESC;")  # Pass ID as a parameter to avoid SQL injection
+    query = "SELECT * FROM item"
+    cursor.execute(query)  # Pass ID as a parameter to avoid SQL injection
     data = cursor.fetchall()  # Fetch all rowsows
 
     # Close the cursor and connection
